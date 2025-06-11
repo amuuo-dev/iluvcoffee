@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Coffee } from './enitities/coffee.entities';
 
 @Injectable()
@@ -19,7 +19,14 @@ export class CoffeesService {
   }
 
   findOne(id: string) {
-    return this.coffees.find((item) => item.id === +id);
+    const coffee = this.coffees.find((item) => item.id === +id);
+    if (!coffee) {
+      throw new HttpException(
+        `cannot find coffee with this ${id}`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return coffee;
   }
 
   create(createCoffeeDto: Omit<Coffee, 'id'>) {
