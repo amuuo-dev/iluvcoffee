@@ -96,3 +96,86 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## What i want have covered :
+
+✅Introduction to NestJS
+✅Installing the NestJS CLI (command-line interface)
+✅Generating our first NestJS Application
+✅What’s inside a NestJS Application
+✅Prerequisite: Install Insomnia or thunder or ever postman for endpoint testing
+✅Running NestJS in Development Mode - npm run start:dev
+✅Creating a Basic Controller
+✅Use Route Parameters
+✅Handling Request Body / Payload
+✅Response Status Codes
+✅Handling Update and Delete Requests
+Implement Pagination with Query Parameters
+Creating a Basic Service
+Send User-Friendly Error Messages
+Encompass Business-Domain in Modules
+Introduction to Data Transfer Objects
+Validate Input Data with Data Transfer Objects
+Handling Malicious Request Data
+Auto-transform Payloads to DTO instances
+Before we Get Started
+Prerequisite: Install Docker
+Running PostgreSQL
+Introducing the TypeORM Module
+Creating a TypeORM Entity
+Using Repository to Access Database
+Create a Relation between two Entities
+Retrieve Entities with their Relations
+Using Cascading Inserts and Updates
+Adding Pagination
+Use Transactions
+Adding Indexes to Entities
+Setting up Migrations
+Understand Dependency Injection
+Control NestJS Module Encapsulation
+Diving Into Custom Providers
+Value based Providers
+Non-class-based Provider Tokens
+Class Providers
+Factory Providers
+Leverage Async Providers
+Create a Dynamic Module
+Control Providers Scope
+Diving Deeper Into Request-Scoped Providers
+Introducing the Config Module
+Custom Environment File Paths
+Schema Validation
+Using the Config Service
+Custom Configuration Files
+Configuration Namespaces and Partial Registration
+Asynchronously Configure Dynamic Modules
+Introducing More Building Blocks
+Understanding Binding Techniques
+Catch Exceptions with Filters
+Protect Routes with Guards
+Using Metadata to Build Generic Guards or Interceptors
+Add Pointcuts with Interceptors
+Handling Timeouts with Interceptors
+Creating Custom Pipes
+Bonus: Add Request Logging with Middleware
+Bonus: Create Custom Param Decorators
+Introducing the Swagger Module
+Enabling CLI Plugin
+Decorating Model Properties
+Adding Example Responses
+Using Tags to Group Resources
+Introduction to Jest
+Getting Started with Test Suites
+Adding Unit Tests
+Diving Into e2e Tests
+Creating our First e2e Test
+Implementing e2e Test Logic
+Before we Get Started
+Prerequisite: Install Docker
+Running MongoDB
+Introducing the Mongoose Module
+Creating a Mongoose Model
+Using a Mongoose Model to Access MongoDB
+Adding Pagination
+Use Transactions
+Adding Indexes to Schemas

@@ -2,10 +2,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
-  HttpCode,
-  HttpStatus,
   Param,
+  Patch,
   Post,
 } from '@nestjs/common';
 
@@ -20,8 +20,15 @@ export class CoffeesController {
     return `this is is the id ${id} and its dynamic`;
   }
   @Post()
-  @HttpCode(HttpStatus.GONE)
   createCoffee(@Body() body) {
     return body;
+  }
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() body) {
+    return `this action updates #${id} coffees`;
+  }
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return `this action removes the #${id} coffee`;
   }
 }
