@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import {
   Body,
   Controller,
@@ -8,30 +6,31 @@ import {
   Param,
   Patch,
   Post,
-  Query,
 } from '@nestjs/common';
+import { CoffeesService } from './coffees.service';
 
 @Controller('coffees')
 export class CoffeesController {
+  constructor(private readonly coffeeService: CoffeesService) {}
+
   @Get()
-  findAll(@Query() queryPagination) {
-    const { limit, offset } = queryPagination;
-    return `this returns all coffees available ${offset} and here is the ${limit}`;
+  findAll() {
+    return this.coffeeService.findAll();
   }
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return `this is is the id ${id} and its dynamic`;
+    return this.coffeeService.findOne(id);
   }
   @Post()
   createCoffee(@Body() body) {
-    return body;
+    return this.coffeeService.create(body);
   }
   @Patch(':id')
   update(@Param('id') id: string, @Body() body) {
-    return `this action updates #${id} coffees`;
+    return this.coffeeService.update(id, body);
   }
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return `this action removes the #${id} coffee`;
+    return this.coffeeService.remove(id);
   }
 }
