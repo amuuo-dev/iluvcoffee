@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import {
   Body,
@@ -7,13 +8,15 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 
 @Controller('coffees')
 export class CoffeesController {
   @Get()
-  findAll() {
-    return 'this returns all coffees available';
+  findAll(@Query() queryPagination) {
+    const { limit, offset } = queryPagination;
+    return `this returns all coffees available ${offset} and here is the ${limit}`;
   }
   @Get(':id')
   findOne(@Param('id') id: string) {
