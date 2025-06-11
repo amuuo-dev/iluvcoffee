@@ -1,4 +1,5 @@
-import { Controller, Get, Param } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 
 @Controller('coffees')
 export class CoffeesController {
@@ -9,5 +10,9 @@ export class CoffeesController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return `this is is the id ${id} and its dynamic`;
+  }
+  @Post()
+  createCoffee(@Body() body) {
+    return body;
   }
 }
