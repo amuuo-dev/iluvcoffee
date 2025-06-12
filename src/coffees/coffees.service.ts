@@ -12,7 +12,7 @@ export class CoffeesService {
       flavors: ['chocolate', 'vanila'],
     },
   ];
-  private nextId = 1;
+  private nextId = 2;
 
   findAll() {
     return this.coffees;
