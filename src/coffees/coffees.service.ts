@@ -18,11 +18,16 @@ export class CoffeesService {
   ) {}
 
   async findAll() {
-    return await this.CoffeeRepository.find();
+    return await this.CoffeeRepository.find({
+      relations: ['flavors'],
+    });
   }
 
   async findOne(id: string) {
-    const coffee = await this.CoffeeRepository.findOneBy({ id: +id });
+    const coffee = await this.CoffeeRepository.findOne({
+      where: { id: +id },
+      relations: ['flavors'],
+    });
     if (!coffee) {
       throw new HttpException(
         `cannot find coffee with this ${id}`,
