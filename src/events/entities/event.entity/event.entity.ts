@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, Index } from 'typeorm';
 
 @Entity()
+@Index(['name', 'type'])
 export class Event {
   @PrimaryGeneratedColumn()
   id: number;
