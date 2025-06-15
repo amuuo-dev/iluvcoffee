@@ -6,11 +6,12 @@ import {
 } from '@nestjs/common';
 import { Coffee } from './enitities/coffee.entities';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { Flavor } from './enitities/flavor.entities';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
+import { Event } from 'src/events/entities/event.entity/event.entity';
 
 @Injectable()
 export class CoffeesService {
@@ -19,6 +20,7 @@ export class CoffeesService {
     private readonly CoffeeRepository: Repository<Coffee>,
     @InjectRepository(Flavor)
     private readonly FlavorRepository: Repository<Flavor>,
+    private readonly datasource: DataSource,
   ) {}
 
   async findAll(paginationQuery: PaginationQueryDto) {
@@ -76,6 +78,32 @@ export class CoffeesService {
     const coffee = await this.findOne(id);
     return this.CoffeeRepository.remove(coffee);
   }
+
+  async recommendCoffee(coffee: Coffee) {
+    const queryRunner = this.datasource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+
+    try {
+      coffee.recommendations++;
+
+      const recommendEvent = new Event();
+      recommendEvent.name = 'recommend_coffee';
+      recommendEvent.type = 'coffee';
+      recommendEvent.payload = { coffeeId: coffee.id };
+
+      await queryRunner.manager.save(coffee);
+      await queryRunner.manager.save(recommendEvent);
+
+      await queryRunner.commitTransaction();
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+    } finally {
+      await queryRunner.release();
+    }
+  }
+
   //like creating a flavor from flavor repo
   private async preloadFlavorByName(name: string): Promise<Flavor> {
     const existingFlavor = await this.FlavorRepository.findOne({
