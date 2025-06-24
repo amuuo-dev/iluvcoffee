@@ -12,7 +12,7 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { Flavor } from './enitities/flavor.entities';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
 import { Event } from 'src/events/entities/event.entity/event.entity';
-// import { COFFEE_BRANDS } from './coffees.constants';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class CoffeesService {
@@ -22,8 +22,11 @@ export class CoffeesService {
     @InjectRepository(Flavor)
     private readonly FlavorRepository: Repository<Flavor>,
     private readonly datasource: DataSource,
-    // @Inject(COFFEE_BRANDS) coffeeBrands: string[],
-  ) {}
+    private readonly configService: ConfigService,
+  ) {
+    const configServiceDbHost = this.configService.get<string>('DATABASE_HOST');
+    console.log(configServiceDbHost);
+  }
 
   async findAll(paginationQuery: PaginationQueryDto) {
     const { limit, offset } = paginationQuery;
